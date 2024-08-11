@@ -19,29 +19,23 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TasarimCalismasiTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+              Anasayfa()
                 }
             }
         }
     }
-}
+//run ettiğimiz zaman çalışacağımız sayfa
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun Anasayfa(){
+    Text(text = "Merhaba Dünya!!!")
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     TasarimCalismasiTheme {
-        Greeting("Android")
+        Anasayfa()
+        //Bu fonksiyon bizim tasarımımızı önizleyecek
     }
 }
