@@ -1,18 +1,21 @@
 package com.techcariernet.compose.tasarimcalismasi
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.techcariernet.compose.tasarimcalismasi.ui.theme.AnaRenk
+import com.techcariernet.compose.tasarimcalismasi.ui.theme.AnaRenkDark
 import com.techcariernet.compose.tasarimcalismasi.ui.theme.YaziRenk1
 
 @Composable
-fun Chip(icerik:String){
+fun Chip(icerik:String, darkTheme: Boolean = isSystemInDarkTheme(),
+){
     Button(
         onClick = { },
         colors = ButtonDefaults.buttonColors(
-            containerColor = AnaRenk,
+            containerColor = if(darkTheme) AnaRenkDark else AnaRenk,
             contentColor = YaziRenk1
         )
     ) {

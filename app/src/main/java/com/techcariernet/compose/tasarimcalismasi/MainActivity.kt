@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -29,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.techcariernet.compose.tasarimcalismasi.ui.theme.AnaRenk
+import com.techcariernet.compose.tasarimcalismasi.ui.theme.AnaRenkDark
 import com.techcariernet.compose.tasarimcalismasi.ui.theme.TasarimCalismasiTheme
 import com.techcariernet.compose.tasarimcalismasi.ui.theme.YaziRenk1
 import com.techcariernet.compose.tasarimcalismasi.ui.theme.YaziRenk2
@@ -45,6 +48,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 //run ettiğimiz zaman çalışacağımız sayfa
 //left-start:android, leading:ios
 //@xml dosyalarında res klasorunu temsil eder.
@@ -53,13 +57,19 @@ class MainActivity : ComponentActivity() {
 //project calues-tr içine tüürkce secenek yazacağız
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Anasayfa() {
+fun Anasayfa(darkTheme: Boolean = isSystemInDarkTheme(),
+) {
+
+    //ekran boyutuna göre içerikleri ayarlar.
+    val configration = LocalConfiguration.current
+    val ekran_genişligi=configration.screenWidthDp
+    val ekranYuksekliği=configration.screenHeightDp
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = "Pizza", fontFamily = pasifico) },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = AnaRenk,
+                    containerColor = if(darkTheme) AnaRenkDark else AnaRenk ,
                     titleContentColor = YaziRenk1,
 
                     )
@@ -79,7 +89,7 @@ fun Anasayfa() {
                 text = stringResource(id = R.string.pizzaBaslik),
                 color = AnaRenk,
                 fontWeight = FontWeight.Bold,
-                fontSize = 36.sp
+                fontSize = (ekran_genişligi/10).sp
             )
             Image(painter = painterResource(id = R.drawable.pizza_resim), contentDescription = "")
             Row(
@@ -114,7 +124,7 @@ fun Anasayfa() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(5.dp),
+                    .padding(start = (ekran_genişligi/10).dp,(ekran_genişligi/10).dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
                 //veya Arrangement SpaceBeetween
             )

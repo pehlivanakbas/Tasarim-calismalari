@@ -39,7 +39,9 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun TasarimCalismasiTheme(
+    //o an gündüz gece saatine göre temayı ayarlar aşağıdaki durum..
     darkTheme: Boolean = isSystemInDarkTheme(),
+    //Her sayfadan erişilebilir.
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
@@ -58,7 +60,7 @@ fun TasarimCalismasiTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-          window.statusBarColor = AnaRenk.toArgb()
+          window.statusBarColor = if(darkTheme) AnaRenkDark.toArgb() else AnaRenk.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
